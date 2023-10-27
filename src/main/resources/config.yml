@@ -12,6 +12,11 @@ settings:
     at-first-or-last: false
     # Do not change this option when server started!
     # Only change this if your server has stopped!
+    # Do not use common symbols!
+    # Plugin will try deletes all lore that similar to below!
+    # If you want to use empty line, use '&7   ' instead!
+    # - '&7   ' is right, the more space you have, the more safe it is.
+    # - '' is wrong. It will make item lose all empty line you set by other plugins!
     display-value:
       - "&#ff3300Enchantment Slots: {enchant_amount}/{slot_amount}"
       - "{enchants}"

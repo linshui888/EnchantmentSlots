@@ -38,7 +38,6 @@ public class CheckValidHook {
         if (EnchantmentSlots.instance.getServer().getPluginManager().isPluginEnabled("EcoItems")) {
             EcoItem tempVal1 = ItemUtilsKt.getEcoItem(itemStack);
             if (tempVal1 != null) {
-                Bukkit.getConsoleSender().sendMessage(tempVal1.getID());
                 return tempVal1.getID();
             }
         }

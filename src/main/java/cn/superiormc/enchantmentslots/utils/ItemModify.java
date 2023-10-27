@@ -116,7 +116,11 @@ public class ItemModify {
                         Pattern.CASE_INSENSITIVE);
                 Matcher matcher2 = pattern2.matcher(str);
                 if (matcher2.find()) {
-                    continue;
+                    for (Enchantment enchantment : serverItemStack.getEnchantments().keySet()) {
+                        if (matcher2.group().equals(getEnchantName(enchantment))) {
+                            continue bigfor;
+                        }
+                    }
                 }
                 if (str.equalsIgnoreCase(ColorParser.parse(ConfigReader.getEmptySlotPlaceholder()))) {
                     continue;
@@ -126,14 +130,14 @@ public class ItemModify {
                         itemMeta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
                         Pattern pattern1 = Pattern.compile(ColorParser.parse(configStr)
                                 .replace("{slot_amount}", "(\\d+)")
-                                .replace("{enchant_amount", "(\\d+)"), Pattern.CASE_INSENSITIVE);
+                                .replace("{enchant_amount}", "(\\d+)"), Pattern.CASE_INSENSITIVE);
                         Matcher matcher1 = pattern1.matcher(str);
+                        ConfigurationSection section = EnchantmentSlots.instance.getConfig().createSection("TEST");
+                        section.set("TEST1", pattern1.pattern());
+                        section.set("TEST2", str);
+                        EnchantmentSlots.instance.saveConfig();
                         if (matcher1.find()) {
-                            for (Enchantment enchantment : serverItemStack.getEnchantments().keySet()) {
-                                if (matcher1.group().equals(getEnchantName(enchantment))) {
-                                    continue bigfor;
-                                }
-                            }
+                            continue bigfor;
                         }
                     }
                 }
