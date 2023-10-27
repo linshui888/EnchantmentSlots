@@ -204,9 +204,9 @@
         <dependency>
             <groupId>com.github.oraxen</groupId>
             <artifactId>oraxen</artifactId>
-            <version>1.152.2</version>
+            <version>1.160.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/oraxen-1.152.2.jar</systemPath>
+            <systemPath>${project.basedir}/lib/oraxen-1.160.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.lumine</groupId>
