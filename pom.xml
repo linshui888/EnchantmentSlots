@@ -176,9 +176,9 @@
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>EcoItems</artifactId>
-            <version>5.10.4</version>
+            <version>5.25.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EcoItems v5.10.4.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EcoItems v5.25.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.willfp</groupId>
@@ -192,7 +192,7 @@
             <artifactId>libreforge</artifactId>
             <version>4.25.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/libreforge-4.25.4-shadow.jar</systemPath>
+            <systemPath>${project.basedir}/lib/libreforge-4.38.0-all.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.willfp</groupId>
