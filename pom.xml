@@ -135,9 +135,9 @@
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>EcoEnchants</artifactId>
-            <version>10.39.2</version>
+            <version>10.40.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EcoEnchants v10.39.2.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EcoEnchants.v10.40.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>su.nexmedia</groupId>
@@ -197,9 +197,9 @@
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>eco</artifactId>
-            <version>6.65.4</version>
+            <version>6.66.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/eco-6.65.4-all.jar</systemPath>
+            <systemPath>${project.basedir}/lib/eco-6.66.0-all.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.oraxen</groupId>
@@ -217,9 +217,9 @@
         <dependency>
             <groupId>pers.neigi</groupId>
             <artifactId>NeigiItems</artifactId>
-            <version>1.15.49</version>
+            <version>1.15.83</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/NeigeItems-1.15.49-api.jar</systemPath>
+            <systemPath>${project.basedir}/lib/NeigeItems-1.15.83-api.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
