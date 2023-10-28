@@ -64,6 +64,9 @@ public class ConfigReader {
         ConfigurationSection section = EnchantmentSlots.instance.getConfig().
                 getConfigurationSection("settings.default-slots-by-item." +
                         CheckValidHook.checkValid(itemStack));
+        if (ConfigReader.getDebug()) {
+            Bukkit.getConsoleSender().sendMessage("§x§9§8§F§B§9§8[EnchantmentSlots] Item ID: " + CheckValidHook.checkValid(itemStack));
+        }
         if (section == null) {
             section = EnchantmentSlots.instance.getConfig().
                     getConfigurationSection("settings.default-slots");
@@ -79,11 +82,11 @@ public class ConfigReader {
         Set<String> groupNameSet = conditionSection.getKeys(false);
         List<Integer> result = new ArrayList<>();
         for (String groupName : groupNameSet) {
-            if (Condition.getBoolean(player, conditionSection.getStringList(groupName))) {
+            if (section.getInt(groupName, 0) != 0 && Condition.getBoolean(player, conditionSection.getStringList(groupName))) {
                 result.add(section.getInt(groupName));
             }
             else {
-                if (section.getInt("default") != 0) {
+                if (section.getInt("default", 0) != 0) {
                     result.add(section.getInt("default", 5));
                 }
             }
@@ -112,7 +115,7 @@ public class ConfigReader {
         Set<String> groupNameSet = conditionSection.getKeys(false);
         List<Integer> result = new ArrayList<>();
         for (String groupName : groupNameSet) {
-            if (Condition.getBoolean(player, conditionSection.getStringList(groupName))) {
+            if (section.getInt(groupName, 0) != 0 && Condition.getBoolean(player, conditionSection.getStringList(groupName))) {
                 result.add(section.getInt(groupName));
             }
             else {

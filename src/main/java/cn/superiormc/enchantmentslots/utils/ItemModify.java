@@ -132,9 +132,6 @@ public class ItemModify {
                                 .replace("{slot_amount}", "(\\d+)")
                                 .replace("{enchant_amount}", "(\\d+)"), Pattern.CASE_INSENSITIVE);
                         Matcher matcher1 = pattern1.matcher(str);
-                        ConfigurationSection section = EnchantmentSlots.instance.getConfig().createSection("TEST");
-                        section.set("TEST1", pattern1.pattern());
-                        section.set("TEST2", str);
                         EnchantmentSlots.instance.saveConfig();
                         if (matcher1.find()) {
                             continue bigfor;
