@@ -6,9 +6,14 @@
 settings:
   debug: false
   add-lore:
+    # Whether we remove display lore when packet send to server.
+    # This will make item more safe, no lead to lore dupe.
+    # However maybe have problems with other plugins.
+    register-remove-lore: true
     # Does not support other packed-based item, enchants plugins.
     # Like EcoEnchants, EcoItems.
     # They will always put their lore at first location and EnchantmentSlots can do nothing about it.
+    # So you need to disable packed-based option above if you want to set this option.
     at-first-or-last: false
     # Do not change this option when server started!
     # Only change this if your server has stopped!
@@ -25,12 +30,18 @@ settings:
     # Only change this if your server has stopped!
     placeholder:
       enchants:
-        format: '&6  {enchant_name}'
+        # Other placeholder: {enchant_level_roman}
+        format: '&6  {enchant_name} {enchant_level}'
       empty-slots:
         format: '&7  --- Empty Slot ---'
+    # This is when will plugin try add lore?
     trigger:
+      # This means all items that can be enchanted will auto add lore.
+      # Recommend not enable it because it will lead to item in third-plugin item will also be added the lore.
       Packet:
         enabled: false
+        # Will try auto check whether it is an enchantable item.
+        # Recommend not use it. If not enable, will use whitelist-items instead.
         auto-check: false
         whitelist-items:
           - wooden_pickaxe
@@ -98,6 +109,7 @@ settings:
       InventoryClickEvent:
         enabled: true
     black-creative-mode: false
+    black-item-has-lore: false
   default-slots:
     default: 5
     vip: 10
@@ -123,7 +135,6 @@ settings:
       - 'permission: group.vip'
   close-inventory-if-reached-limit: true
   remove-illegal-extra-enchant: true
-  black-creative-mode-player: true
 
 add-slot-items:
   A:

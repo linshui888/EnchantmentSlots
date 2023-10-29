@@ -25,7 +25,7 @@ public class WindowClick extends GeneralPackets{
 
     @Override
     protected void initPacketAdapter() {
-        packetAdapter = new PacketAdapter(EnchantmentSlots.instance, ListenerPriority.NORMAL, PacketType.Play.Client.WINDOW_CLICK) {
+        packetAdapter = new PacketAdapter(EnchantmentSlots.instance, ListenerPriority.LOWEST, PacketType.Play.Client.WINDOW_CLICK) {
             @Override
             public void onPacketReceiving(PacketEvent event) {
                 if (ConfigReader.getDebug()) {

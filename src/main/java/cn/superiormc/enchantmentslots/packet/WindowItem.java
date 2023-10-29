@@ -28,7 +28,7 @@ public class WindowItem extends GeneralPackets{
 
     @Override
     protected void initPacketAdapter() {
-        packetAdapter = new PacketAdapter(EnchantmentSlots.instance, ListenerPriority.NORMAL, PacketType.Play.Server.WINDOW_ITEMS) {
+        packetAdapter = new PacketAdapter(EnchantmentSlots.instance, ListenerPriority.MONITOR, PacketType.Play.Server.WINDOW_ITEMS) {
             @Override
             public void onPacketSending(PacketEvent event) {
                 if (ConfigReader.getDebug()) {

@@ -5,7 +5,6 @@ import com.willfp.ecoenchants.enchants.EcoEnchant;
 import com.willfp.ecoenchants.enchants.EcoEnchants;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -33,15 +32,23 @@ public class ItemModify {
             clientItemStack.setItemMeta(tempMeta);
         }
         ItemMeta itemMeta = clientItemStack.getItemMeta();
+        if (itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
+            return serverItemStack;
+        }
         List<String> lore = new ArrayList<>();
-        if (ConfigReader.getAtFirstOrLast()) {
+        if (ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack)) {
             for (String line : ConfigReader.getDisplayLore()) {
                 if (line.equals("{enchants}")) {
                     for (Enchantment enchantment : clientItemStack.getEnchantments().keySet()) {
                         lore.add(ColorParser.parse(
                                 ConfigReader.getEnchantPlaceholder().
-                                        replace("{enchant_name}", getEnchantName(enchantment))));
+                                        replace("{enchant_name}", getEnchantName(enchantment)).
+                                        replace("{enchant_level}", String.valueOf(
+                                                clientItemStack.getEnchantments().get(enchantment))).
+                                        replace("{enchant_level_roman}", NumberUtil.convertToRoman(
+                                                clientItemStack.getEnchantments().get(enchantment)))));
                     }
+                    itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     continue;
                 }
                 if (line.equals("{empty_slots}")) {
@@ -53,21 +60,26 @@ public class ItemModify {
                     continue;
                 }
                 lore.add(ColorParser.parse(line)
-                        .replace("{slot_amount}", String.valueOf(ItemLimits.getMaxEnchantments(player, serverItemStack))
-                        .replace("{enchant_amount}", String.valueOf(clientItemStack.getEnchantments().size()))));
+                        .replace("{slot_amount}", String.valueOf(ItemLimits.getMaxEnchantments(player, serverItemStack)))
+                        .replace("{enchant_amount}", String.valueOf(clientItemStack.getEnchantments().size())));
 
             }
         }
         if (itemMeta.hasLore()) {
-            lore.addAll(itemMeta.getLore());
+            List<String> tempLore = itemMeta.getLore();
+            lore.addAll(ConfigReader.editDisplayLore(tempLore, clientItemStack, player));
         }
-        if (!ConfigReader.getAtFirstOrLast()) {
+        if (!ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack)) {
             for (String line : ConfigReader.getDisplayLore()) {
                 if (line.equals("{enchants}")) {
                     for (Enchantment enchantment : clientItemStack.getEnchantments().keySet()) {
                         lore.add(ColorParser.parse(
                                 ConfigReader.getEnchantPlaceholder().
-                                        replace("{enchant_name}", getEnchantName(enchantment))));
+                                        replace("{enchant_name}", getEnchantName(enchantment)).
+                                        replace("{enchant_level}", String.valueOf(
+                                        clientItemStack.getEnchantments().get(enchantment))).
+                                        replace("{enchant_level_roman}", NumberUtil.convertToRoman(
+                                                clientItemStack.getEnchantments().get(enchantment)))));
                     }
                     itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     continue;
@@ -112,7 +124,9 @@ public class ItemModify {
             for (String str : lore) {
                 Pattern pattern2 = Pattern.compile(ColorParser.parse(
                                 ConfigReader.getEnchantPlaceholder()).
-                        replace("{enchant_name}", "(.*)"),
+                        replace("{enchant_name}", "(.*)").
+                        replace("{enchant_level}", "(\\d+)").
+                        replace("{enchant_level_roman}", "(.*)"),
                         Pattern.CASE_INSENSITIVE);
                 Matcher matcher2 = pattern2.matcher(str);
                 if (matcher2.find()) {

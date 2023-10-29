@@ -5,7 +5,6 @@ import cn.superiormc.enchantmentslots.utils.ConfigReader;
 import cn.superiormc.enchantmentslots.utils.ItemLimits;
 import cn.superiormc.enchantmentslots.utils.ItemModify;
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
@@ -23,7 +22,7 @@ public class SetSlots extends GeneralPackets{
     }
     @Override
     protected void initPacketAdapter(){
-        packetAdapter = new PacketAdapter(EnchantmentSlots.instance, ListenerPriority.NORMAL, PacketType.Play.Server.SET_SLOT) {
+        packetAdapter = new PacketAdapter(EnchantmentSlots.instance, ListenerPriority.MONITOR, PacketType.Play.Server.SET_SLOT) {
             @Override
             public void onPacketSending(PacketEvent event) {
                 if (ConfigReader.getDebug()) {

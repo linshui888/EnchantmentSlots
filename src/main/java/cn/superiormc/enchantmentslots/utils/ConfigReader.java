@@ -5,9 +5,9 @@ import cn.superiormc.enchantmentslots.hooks.CheckValidHook;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +28,9 @@ public class ConfigReader {
     public static boolean getRemoveExtraEnchants() {
         return EnchantmentSlots.instance.getConfig().getBoolean("settings.remove-illegal-extra-enchant", true);
     }
+    public static boolean getRegisterRemoveLore() {
+        return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.register-remove-lore", false);
+    }
     public static boolean getAtFirstOrLast() {
         return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.at-first-or-last", false);
     }
@@ -41,6 +44,10 @@ public class ConfigReader {
     }
     public static boolean getBlackCreativeMode() {
         return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.black-creative-mode", true);
+    }
+    public static boolean getBlackHasLore(ItemStack itemStack) {
+        return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.black-item-has-lore", false) &&
+                itemStack.hasItemMeta() && itemStack.getItemMeta().hasLore();
     }
     public static boolean getEnchantItemTrigger() {
         return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.trigger.EnchantItemEvent.enabled", true);
@@ -60,6 +67,35 @@ public class ConfigReader {
     public static List<String> getDisplayLore() {
         return EnchantmentSlots.instance.getConfig().getStringList("settings.add-lore.display-value");
     }
+    public static List<String> editDisplayLore(List<String> lore, ItemStack itemStack, Player player) {
+        List<String> tempLore = new ArrayList<>();
+        for (String str : lore) {
+            if (str.contains("{enchants}")) {
+                for (Enchantment enchantment : itemStack.getEnchantments().keySet()) {
+                    tempLore.add(ColorParser.parse(
+                            ConfigReader.getEnchantPlaceholder().
+                                    replace("{enchant_name}", ItemModify.getEnchantName(enchantment)).
+                                    replace("{enchant_level}", String.valueOf(
+                                            itemStack.getEnchantments().get(enchantment))).
+                                    replace("{enchant_level_roman}", NumberUtil.convertToRoman(
+                                            itemStack.getEnchantments().get(enchantment)))));
+                }
+                continue;
+            }
+            if (str.contains("{empty_slots}")) {
+                int i = ItemLimits.getMaxEnchantments(player, itemStack) - itemStack.getEnchantments().size();
+                while (i > 0) {
+                    tempLore.add(ColorParser.parse(ConfigReader.getEmptySlotPlaceholder()));
+                    i--;
+                }
+                continue;
+            }
+            tempLore.add(str
+                    .replace("{slot_amount}", String.valueOf(ItemLimits.getMaxEnchantments(player, itemStack)))
+                    .replace("{enchant_amount}", String.valueOf(itemStack.getEnchantments().size())));
+        }
+        return tempLore;
+    }
     public static int getDefaultLimits(Player player, ItemStack itemStack) {
         ConfigurationSection section = EnchantmentSlots.instance.getConfig().
                 getConfigurationSection("settings.default-slots-by-item." +
@@ -74,6 +110,8 @@ public class ConfigReader {
         ConfigurationSection conditionSection = EnchantmentSlots.instance.getConfig().
                 getConfigurationSection("settings.slots-conditions");
         if (section == null) {
+            Bukkit.getConsoleSender().sendMessage("§x§9§8§F§B§9§8[EnchantmentSlots] §cError: " +
+                    "Can not found default-slots section, default set to 5!");
             return 5;
         }
         if (conditionSection == null) {

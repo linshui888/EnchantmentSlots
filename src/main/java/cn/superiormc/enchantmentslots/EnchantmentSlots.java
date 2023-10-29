@@ -49,9 +49,11 @@ public final class EnchantmentSlots extends JavaPlugin {
     }
 
     public void registerPackets() {
+        if (ConfigReader.getRegisterRemoveLore()) {
+            new SetCreativeSlots();
+            new WindowClick();
+        }
         new SetSlots();
-        new SetCreativeSlots();
         new WindowItem();
-        new WindowClick();
     }
 }
