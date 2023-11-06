@@ -32,11 +32,9 @@ public class ItemModify {
             clientItemStack.setItemMeta(tempMeta);
         }
         ItemMeta itemMeta = clientItemStack.getItemMeta();
-        if (itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
-            return serverItemStack;
-        }
         List<String> lore = new ArrayList<>();
-        if (ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack)) {
+        if (ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack) &&
+            !itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
             for (String line : ConfigReader.getDisplayLore()) {
                 if (line.equals("{enchants}")) {
                     for (Enchantment enchantment : clientItemStack.getEnchantments().keySet()) {
@@ -69,7 +67,8 @@ public class ItemModify {
             List<String> tempLore = itemMeta.getLore();
             lore.addAll(ConfigReader.editDisplayLore(tempLore, clientItemStack, player));
         }
-        if (!ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack)) {
+        if (!ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack) &&
+                !itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
             for (String line : ConfigReader.getDisplayLore()) {
                 if (line.equals("{enchants}")) {
                     for (Enchantment enchantment : clientItemStack.getEnchantments().keySet()) {
