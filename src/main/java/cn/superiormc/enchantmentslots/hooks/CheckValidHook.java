@@ -1,6 +1,7 @@
 package cn.superiormc.enchantmentslots.hooks;
 
 import cn.superiormc.enchantmentslots.EnchantmentSlots;
+import com.willfp.eco.core.items.Items;
 import com.willfp.ecoarmor.sets.ArmorSet;
 import com.willfp.ecoarmor.sets.ArmorSlot;
 import com.willfp.ecoarmor.sets.ArmorUtils;
@@ -45,6 +46,12 @@ public class CheckValidHook {
             ArmorSet tempVal1 = ArmorUtils.getSetOnItem(itemStack);
             if (tempVal1 != null) {
                 return tempVal1.getId();
+            }
+        }
+        if (EnchantmentSlots.instance.getServer().getPluginManager().isPluginEnabled("eco")) {
+            Bukkit.getConsoleSender().sendMessage(Items.toLookupString(itemStack));
+            if (Items.getCustomItem(itemStack) != null) {
+                return Items.getCustomItem(itemStack).getKey().getKey();
             }
         }
         if (EnchantmentSlots.instance.getServer().getPluginManager().isPluginEnabled("MythicMobs")) {

@@ -109,7 +109,7 @@ settings:
         enabled: true
       InventoryClickEvent:
         enabled: true
-    black-creative-mode: false
+    black-creative-mode: true
     black-item-has-lore: false
   default-slots:
     default: 5
