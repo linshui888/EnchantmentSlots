@@ -49,7 +49,6 @@ public class CheckValidHook {
             }
         }
         if (EnchantmentSlots.instance.getServer().getPluginManager().isPluginEnabled("eco")) {
-            Bukkit.getConsoleSender().sendMessage(Items.toLookupString(itemStack));
             if (Items.getCustomItem(itemStack) != null) {
                 return Items.getCustomItem(itemStack).getKey().getKey();
             }
