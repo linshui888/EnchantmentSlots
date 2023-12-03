@@ -75,6 +75,7 @@ settings:
           - diamond_sword
           - netherite_sword
           - fishing_rod
+          - trident
           - elytra
           - bow
           - crossbow
@@ -105,6 +106,8 @@ settings:
           - golden_boots
           - diamond_boots
           - netherite_boots
+          - book
+          - enchanted_book
       EnchantItemEvent:
         enabled: true
       InventoryClickEvent:
