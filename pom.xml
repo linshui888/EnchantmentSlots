@@ -148,7 +148,7 @@
             <artifactId>EcoEnchants</artifactId>
             <version>10.39.2</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EcoEnchants v10.39.2.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EcoEnchants.v10.40.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>su.nexmedia</groupId>
@@ -182,42 +182,42 @@
             <artifactId>MythicMobs</artifactId>
             <version>4.11.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/MythicMobs-4.11.0-004.jar</systemPath>
+            <systemPath>${project.basedir}/lib/MythicMobs-4.11.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>EcoItems</artifactId>
-            <version>5.10.4</version>
+            <version>5.25.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EcoItems v5.10.4.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EcoItems v5.25.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>EcoArmor</artifactId>
-            <version>7.145.4</version>
+            <version>8.15.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EcoArmor v7.145.4.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EcoArmor v8.15.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>libreforge</artifactId>
             <version>4.25.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/libreforge-4.25.4-shadow.jar</systemPath>
+            <systemPath>${project.basedir}/lib/libreforge-4.38.0-all.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>eco</artifactId>
-            <version>6.65.4</version>
+            <version>6.66.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/eco-6.65.4-all.jar</systemPath>
+            <systemPath>${project.basedir}/lib/eco-6.66.0-all.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.oraxen</groupId>
             <artifactId>oraxen</artifactId>
-            <version>1.152.2</version>
+            <version>1.160.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/oraxen-1.152.2.jar</systemPath>
+            <systemPath>${project.basedir}/lib/oraxen-1.160.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.lumine</groupId>
@@ -228,9 +228,9 @@
         <dependency>
             <groupId>pers.neigi</groupId>
             <artifactId>NeigiItems</artifactId>
-            <version>1.15.49</version>
+            <version>1.15.83</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/NeigeItems-1.15.49-api.jar</systemPath>
+            <systemPath>${project.basedir}/lib/NeigeItems-1.15.83-api.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
