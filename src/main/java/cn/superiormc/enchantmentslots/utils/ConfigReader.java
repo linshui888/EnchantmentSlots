@@ -45,9 +45,14 @@ public class ConfigReader {
     public static boolean getBlackCreativeMode() {
         return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.black-creative-mode", true);
     }
-    public static boolean getBlackHasLore(ItemStack itemStack) {
-        return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.black-item-has-lore", false) &&
-                itemStack.hasItemMeta() && itemStack.getItemMeta().hasLore();
+    public static boolean getBlackItems(ItemStack itemStack) {
+        List<String> tempVal1 = new ArrayList<>();
+        for (String tempVal2 : EnchantmentSlots.instance.getConfig().getStringList("settings.add-lore.black-items")) {
+            tempVal1.add(tempVal2.toLowerCase());
+        }
+        return tempVal1.contains(itemStack.getType().getKey().getKey()) &&
+                (EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.black-item-has-lore", false) &&
+                itemStack.hasItemMeta() && itemStack.getItemMeta().hasLore());
     }
     public static boolean getEnchantItemTrigger() {
         return EnchantmentSlots.instance.getConfig().getBoolean("settings.add-lore.trigger.EnchantItemEvent.enabled", true);

@@ -6,7 +6,7 @@
 
     <groupId>cn.superiormc</groupId>
     <artifactId>EnchantmentSlots</artifactId>
-    <version>1.4.8</version>
+    <version>1.5.0</version>
     <packaging>jar</packaging>
 
     <name>EnchantmentSlots</name>
@@ -139,7 +139,14 @@
         <dependency>
             <groupId>com.willfp</groupId>
             <artifactId>EcoEnchants</artifactId>
-            <version>10.40.0</version>
+            <version>11.0.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/EcoEnchants v11.0.3.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.willfp.1</groupId>
+            <artifactId>EcoEnchants</artifactId>
+            <version>10.39.2</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/EcoEnchants.v10.40.0.jar</systemPath>
         </dependency>

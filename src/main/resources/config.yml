@@ -17,8 +17,7 @@ settings:
     at-first-or-last: false
     # Do not change this option when server started!
     # Only change this if your server has stopped!
-    # Do not use common symbols!
-    # Plugin will try deletes all lore that similar to below!
+    # Plugin will try deletes all lore that similar to below if you enable register-remove-lore option!
     # If you want to use empty line, use '&7   ' instead!
     # - '&7   ' is right, the more space you have, the more safe it is.
     # - '' is wrong. It will make item lose all empty line you set by other plugins!
@@ -26,6 +25,11 @@ settings:
       - "&#ff3300Enchantment Slots: {enchant_amount}/{slot_amount}"
       - "{enchants}"
       - "{empty_slots}"
+    black-creative-mode: true
+    black-item-has-lore: false
+    black-items:
+      - book
+      - enchanted_book
     # Do not change this option when server started!
     # Only change this if your server has stopped!
     placeholder:
@@ -112,8 +116,6 @@ settings:
         enabled: true
       InventoryClickEvent:
         enabled: true
-    black-creative-mode: true
-    black-item-has-lore: false
   default-slots:
     default: 5
     vip: 10

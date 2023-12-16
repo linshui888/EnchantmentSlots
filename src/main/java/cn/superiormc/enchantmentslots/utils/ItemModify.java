@@ -1,8 +1,8 @@
 package cn.superiormc.enchantmentslots.utils;
 
 import cn.superiormc.enchantmentslots.EnchantmentSlots;
-import com.willfp.ecoenchants.enchants.EcoEnchant;
-import com.willfp.ecoenchants.enchants.EcoEnchants;
+import com.willfp.ecoenchants.enchant.EcoEnchant;
+import com.willfp.ecoenchants.enchant.EcoEnchants;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -33,7 +33,7 @@ public class ItemModify {
         }
         ItemMeta itemMeta = clientItemStack.getItemMeta();
         List<String> lore = new ArrayList<>();
-        if (ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack) &&
+        if (ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackItems(clientItemStack) &&
             !itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
             for (String line : ConfigReader.getDisplayLore()) {
                 if (line.equals("{enchants}")) {
@@ -67,7 +67,7 @@ public class ItemModify {
             List<String> tempLore = itemMeta.getLore();
             lore.addAll(ConfigReader.editDisplayLore(tempLore, clientItemStack, player));
         }
-        if (!ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackHasLore(clientItemStack) &&
+        if (!ConfigReader.getAtFirstOrLast() && !ConfigReader.getBlackItems(clientItemStack) &&
                 !itemMeta.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
             for (String line : ConfigReader.getDisplayLore()) {
                 if (line.equals("{enchants}")) {
@@ -190,12 +190,21 @@ public class ItemModify {
 
     public static String getEnchantName(Enchantment enchantment) {
         if (EnchantmentSlots.instance.getServer().getPluginManager().isPluginEnabled("EcoEnchants")) {
-            EcoEnchant ecoEnchant = EcoEnchants.getByKey(enchantment.getKey());
-            if (ConfigReader.getDebug()) {
-                Bukkit.getConsoleSender().sendMessage(EcoEnchants.keySet() + "");
+            if (EnchantmentSlots.instance.getServer().getPluginManager().getPlugin("EcoEnchants").getDescription().
+                    getVersion().startsWith("11")) {
+                EcoEnchant ecoEnchant = EcoEnchants.INSTANCE.getByID(enchantment.getKey().getKey());
+                if (ecoEnchant != null) {
+                    return ecoEnchant.getRawDisplayName();
+                }
             }
-            if (ecoEnchant != null) {
-                return ecoEnchant.getDisplayName();
+            else {
+                com.willfp.ecoenchants.enchants.EcoEnchant ecoEnchant = com.willfp.ecoenchants.enchants.EcoEnchants.getByKey(enchantment.getKey());
+                if (ConfigReader.getDebug()) {
+                    Bukkit.getConsoleSender().sendMessage(com.willfp.ecoenchants.enchants.EcoEnchants.keySet() + "");
+                }
+                if (ecoEnchant != null) {
+                    return ecoEnchant.getDisplayName();
+                }
             }
         } else if (EnchantmentSlots.instance.getServer().getPluginManager().isPluginEnabled("ExcellentEnchants")) {
             ExcellentEnchant excellentEnchant = EnchantRegistry.getByKey(enchantment.getKey());
